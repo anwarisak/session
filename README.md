@@ -18,3 +18,14 @@ unset($_SESSION['date']);
     header('Location:login.php');
 ?>
 ```
+> IMAGE 
+
+```
+ <img src="<?php echo "uploads/". $_SESSION ['image'] ?>
+```
+> USERNAME
+
+```
+<?php echo $_SESSION ['username'] ?>
+
+```
