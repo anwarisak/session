@@ -114,3 +114,24 @@ $("#login").on("submit", function(event){
   })
     });
 ```
+
+> PROCTURE 
+
+````
+BEGIN
+
+if exists( select * from user where username = _username and password = md5(_password))then
+if exists( select * from user where username = _username and status = 'active')then 
+
+select * from user where username = _username ;
+else
+
+select 'locked 'message;
+
+end if;
+
+else
+select 'deny 'message;
+end if;
+END
+````
