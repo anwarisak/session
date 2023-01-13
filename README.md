@@ -135,3 +135,73 @@ select 'deny 'message;
 end if;
 END
 ````
+
+>total user 
+
+`````
+
+function get_total_user($conn){
+    extract($_POST);
+    $data = array();
+    $array_data = array();
+   $query ="select count(user_id) as user  from user";
+    $result = $conn->query($query);
+
+
+    if($result){
+        $row = $result->fetch_assoc();
+        
+        $data = array("status" => true, "data" => $row);
+
+
+    }else{
+        $data = array("status" => false, "data"=> $conn->error);
+             
+    }
+
+    echo json_encode($data);
+}
+
+`````
+
+>total user js
+`````
+function totaluser(){
+  
+  let sendingData ={
+    "action": "get_total_user",
+}
+
+$.ajax({
+  method: "POST",
+  dataType: "JSON",
+  url: "api/user_api.php",
+  data : sendingData,
+
+    success : function(data){
+        let status= data.status;
+        let response= data.data;
+      
+
+        if(status){
+
+            document.querySelector("#totaluser").innerText = response['user']
+
+        }else{
+          displaymessagee("error", response);
+        }
+
+    },
+    error: function(data){
+
+    }
+
+})
+}
+
+`````
+
+
+
+
+
