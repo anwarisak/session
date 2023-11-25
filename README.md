@@ -1,5 +1,7 @@
+> LOGIN FILE
+
 ```
-<?php 
+<?php
 session_start();
 if(isset($_SESSION['username'])){
     header('Location:index.php');
@@ -7,10 +9,11 @@ if(isset($_SESSION['username'])){
 
 ?>
 ```
-> LOGIN FILE
+
+> LOGOUT FILE
 
 ```
-<?php 
+<?php
 session_start();
 unset($_SESSION['username']);
 unset($_SESSION['image']);
@@ -18,7 +21,21 @@ unset($_SESSION['date']);
     header('Location:login.php');
 ?>
 ```
-> IMAGE 
+
+> INDEX FILE
+
+```
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+  header('Location:login.php');
+  die();
+}
+
+?>
+```
+
+> IMAGE
 
 ```
  <img src="<?php echo "uploads/". $_SESSION ['image'] ?>
@@ -45,7 +62,7 @@ function login($conn){
                 $data = array("status" => false, "data" => "username or password is incorrect");
 
             }else {
-                $data = array("status" => false, "data" => "this username is locked by administrator"); 
+                $data = array("status" => false, "data" => "username is locked by administrator"); 
 
             }
 
@@ -58,7 +75,7 @@ function login($conn){
 
     }else{
         $data = array("status" => false, "data"=> $conn->error);
-             
+
     }
 
     echo json_encode($data);
@@ -70,7 +87,7 @@ function login($conn){
 ```
 
 $("#login").on("submit", function(event){
-    
+
     event.preventDefault();
 
     let username = $("#username").val();
@@ -84,45 +101,45 @@ $("#login").on("submit", function(event){
       "username": username,
       "password": password
   }
-  
+
   $.ajax({
     method: "POST",
     dataType: "JSON",
     url: "api/login_api.php",
     data : sendingData,
-  
+
       success : function(data){
           let status= data.status;
           let response= data.data;
-        
-  
+
+
           if(status){
 
             window.location.href = "index.php"
-            console.log("welecome")
+            console.log("goooood")
   
           }else{
             console.log("unsuccess login")
 
             displaymessagee("error", response);
           }
-  
+
       },
       error: function(data){
-  
+
       }
-  
+
   })
     });
 ```
 
-> PROCTURE 
+> PROCTURE
 
-````
+```
 BEGIN
 
 if exists( select * from user where username = _username and password = md5(_password))then
-if exists( select * from user where username = _username and status = 'active')then 
+if exists( select * from user where username = _username and status = 'active')then
 
 select * from user where username = _username ;
 else
@@ -135,11 +152,11 @@ else
 select 'deny 'message;
 end if;
 END
-````
+```
 
->total user 
+> total user
 
-`````
+```
 
 function get_total_user($conn){
     extract($_POST);
@@ -151,24 +168,25 @@ function get_total_user($conn){
 
     if($result){
         $row = $result->fetch_assoc();
-        
+
         $data = array("status" => true, "data" => $row);
 
 
     }else{
         $data = array("status" => false, "data"=> $conn->error);
-             
+
     }
 
     echo json_encode($data);
 }
 
-`````
+```
 
->total user js
-`````
+> total user js
+
+```
 function totaluser(){
-  
+
   let sendingData ={
     "action": "get_total_user",
 }
@@ -182,7 +200,7 @@ $.ajax({
     success : function(data){
         let status= data.status;
         let response= data.data;
-      
+
 
         if(status){
 
@@ -200,9 +218,4 @@ $.ajax({
 })
 }
 
-`````
-
-
-
-
-
+```
