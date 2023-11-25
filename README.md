@@ -26,6 +26,7 @@ unset($_SESSION['date']);
 
 > LOGIN API
 
+
 ```
 function login($conn){
     extract($_POST);
@@ -44,7 +45,7 @@ function login($conn){
                 $data = array("status" => false, "data" => "username or password is incorrect");
 
             }else {
-                $data = array("status" => false, "data" => "username is locked by administrator"); 
+                $data = array("status" => false, "data" => "this username is locked by administrator"); 
 
             }
 
@@ -98,10 +99,10 @@ $("#login").on("submit", function(event){
           if(status){
 
             window.location.href = "index.php"
-            console.log("goooood")
+            console.log("welecome")
   
           }else{
-            console.log("noooooo")
+            console.log("unsuccess login")
 
             displaymessagee("error", response);
           }
