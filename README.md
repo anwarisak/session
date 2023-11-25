@@ -116,7 +116,7 @@ $("#login").on("submit", function(event){
           if(status){
 
             window.location.href = "index.php"
-            console.log("goooood")
+            console.log("welcome")
   
           }else{
             console.log("unsuccess login")
