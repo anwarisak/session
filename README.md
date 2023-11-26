@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
 ?>
 ```
 
-> IMAGE
+> IMAGES
 
 ```
  <img src="<?php echo "uploads/". $_SESSION ['image'] ?>
