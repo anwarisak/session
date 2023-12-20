@@ -1,4 +1,4 @@
-> LOGIN FILE
+> LOGIN FILE.
 
 ```
 <?php
